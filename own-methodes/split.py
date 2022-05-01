@@ -15,6 +15,8 @@ empt_pos = {
 def calculate(stri):
     global Oplace,opt,num_and_for
     empty = 0
+    Oplace = 0
+    num_and_for = []
     print(f"the formula is : {str} ")
     for i in range(len(stri)):
         if stri[i] == " ":
@@ -24,8 +26,8 @@ def calculate(stri):
             Oplace = i
     print(f"full list of empty spaces in String : {empt_pos}")
     print(f"full list of words in String :  {num_and_for}")
-    Oplace = 0
-    num_and_for = []
+    return num_and_for
+
 
         
 
