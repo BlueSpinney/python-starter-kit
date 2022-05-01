@@ -1,0 +1,2 @@
+my own version of the split function in python 
+that takes a string input and Separates all the words into an array
