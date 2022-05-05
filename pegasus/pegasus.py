@@ -51,7 +51,29 @@ def pegasus(peg):
             enclst.append(op)
         l1.configure(text=enclst)
     print(f"youre key : {enclst}")
+    salt(enclst)
 
+def salt(lst):
+    saltlst = []
+    for ch in lst:
+        if random.randint(0,3) == 3:
+            ch = random.randint(0,1)
+            fnum = random.randint(0,27)
+            fval = random.randint(0,16)
+            if ch == 0:
+                fop = "P"
+                lst.append(fnum + fval)
+                lst.append(fval)
+                lst.append(fop)
+                saltlst.append(ch)
+            elif ch ==1:
+                fop = "s"
+                lst.append(fnum - fval)
+                lst.append(fval)
+                lst.append(fop)
+                saltlst.append(ch)
+    print("youre salt {}".format(saltlst))
+            
     
 def Anihalate():
     with open("key.txt","w") as key:
