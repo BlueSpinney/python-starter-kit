@@ -5,8 +5,20 @@ import string
 main = Tk()
 main.title("unicorn")
 
-def unicorn(uni):
+def unicorn(uni,unico):
+    sup = 0
     uni = uni.strip('][').split(', ')
+    unico = unico.strip('][').split(', ')
+    for each in range(len(unico ) - sup):
+        print(unico[each])
+        print(f"removed : {uni[int(unico[each]) - sup]} {uni[int(unico[each]) + 1- sup]} {uni[int(unico[each]) + 2- sup]}")
+        del uni[(int(unico[each]) - sup)]
+        print(uni)
+        del uni[(int(unico[each])- sup)]
+        print(uni)
+        del uni[(int(unico[each])- sup)]
+        sup = sup + 3
+    print(uni)
 
     count = 0
     alphabet = string.ascii_lowercase
@@ -36,10 +48,16 @@ def unicorn(uni):
             l1.pack()
     
 
-b1 = Button(main,text="decrypt",command=lambda : unicorn(e1.get()))
+b1 = Button(main,text="decrypt",command=lambda : unicorn(e1.get(),e2.get()))    
+inf = Label(main,text="key")
 e1 = Entry(main)
+inf2 = Label(main,text="salt")
+e2 = Entry(main)
 l1 = Label(main,text="")
 
 b1.pack()
+inf.pack()
 e1.pack()
+inf2.pack()
+e2.pack()
 main.mainloop()
