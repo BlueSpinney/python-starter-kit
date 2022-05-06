@@ -51,7 +51,34 @@ def pegasus(peg):
             enclst.append(op)
         l1.configure(text=enclst)
     print(f"youre key : {enclst}")
+    salt(enclst)
 
+def salt(lst):
+    saltlst = []
+    REE = 0
+    for BEE in range(int(len(lst) / 3)):
+        REE = REE + 3
+        if random.randint(0,3) == 3:
+            ch = random.randint(0,1)
+            fnum = random.randint(0,27)
+            fval = random.randint(0,16)
+            if ch == 0:
+                fop = "P"
+                lst.insert(REE,fnum + fval)
+                lst.insert(REE + 1,fval)
+                lst.insert(REE + 2,fop)
+                print(ch)
+                saltlst.append(REE)
+            elif ch ==1:
+                fop = "s"
+                lst.insert(REE,fnum - fval)
+                lst.insert(REE + 1,fval)
+                lst.insert(REE + 2,fop)
+                print(ch)
+                saltlst.append(REE)
+    print(f"youre saltet key : {lst}")
+    print(f"youre salt : {saltlst}")
+            
     
 def Anihalate():
     with open("key.txt","w") as key:
