@@ -55,24 +55,29 @@ def pegasus(peg):
 
 def salt(lst):
     saltlst = []
-    for ch in lst:
+    REE = 0
+    for BEE in range(int(len(lst) / 3)):
+        REE = REE + 3
         if random.randint(0,3) == 3:
             ch = random.randint(0,1)
             fnum = random.randint(0,27)
             fval = random.randint(0,16)
             if ch == 0:
                 fop = "P"
-                lst.append(fnum + fval)
-                lst.append(fval)
-                lst.append(fop)
-                saltlst.append(ch)
+                lst.insert(REE,fnum + fval)
+                lst.insert(REE + 1,fval)
+                lst.insert(REE + 2,fop)
+                print(ch)
+                saltlst.append(REE)
             elif ch ==1:
                 fop = "s"
-                lst.append(fnum - fval)
-                lst.append(fval)
-                lst.append(fop)
-                saltlst.append(ch)
-    print("youre salt {}".format(saltlst))
+                lst.insert(REE,fnum - fval)
+                lst.insert(REE + 1,fval)
+                lst.insert(REE + 2,fop)
+                print(ch)
+                saltlst.append(REE)
+    print(f"youre saltet key : {lst}")
+    print(f"youre salt : {saltlst}")
             
     
 def Anihalate():
