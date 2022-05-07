@@ -9,16 +9,18 @@ def unicorn(uni,unico):
     sup = 0
     uni = uni.strip('][').split(', ')
     unico = unico.strip('][').split(', ')
-    for each in range(len(unico ) - sup):
-        print(unico[each])
-        print(f"removed : {uni[int(unico[each]) - sup]} {uni[int(unico[each]) + 1- sup]} {uni[int(unico[each]) + 2- sup]}")
-        del uni[(int(unico[each]) - sup)]
+    print(unico)
+    if unico != ['']:
+        for each in range(len(unico ) - sup):
+            print(unico[each])
+            print(f"removed : {uni[int(unico[each]) - sup]} {uni[int(unico[each]) + 1- sup]} {uni[int(unico[each]) + 2- sup]}")
+            del uni[(int(unico[each]) - sup)]
+            print(uni)
+            del uni[(int(unico[each])- sup)]
+            print(uni)
+            del uni[(int(unico[each])- sup)]
+            sup = sup + 3
         print(uni)
-        del uni[(int(unico[each])- sup)]
-        print(uni)
-        del uni[(int(unico[each])- sup)]
-        sup = sup + 3
-    print(uni)
 
     count = 0
     alphabet = string.ascii_lowercase

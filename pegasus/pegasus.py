@@ -14,7 +14,6 @@ main = Tk()
 main.title("pegasus")
 def pegasus(peg):
     randint = 0
-    pegmax = 16
     alphabet = string.ascii_lowercase
     alphabet = list(alphabet)
     alphabet.append(" ")
@@ -58,7 +57,7 @@ def salt(lst):
     REE = 0
     for BEE in range(int(len(lst) / 3)):
         REE = REE + 3
-        if random.randint(0,3) == 3:
+        if random.randint(0,5) != 1:
             ch = random.randint(0,1)
             fnum = random.randint(0,27)
             fval = random.randint(0,16)
