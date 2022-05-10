@@ -1,14 +1,36 @@
 
+
 from tkinter import *
 import string
 
 main = Tk()
 main.title("unicorn")
 
-def unicorn(uni,unico):
-    sup = 0
+
+def moveval(index,newindex,arr):
+    oldv = arr[index]
+    oldv2 = arr[newindex]
+    
+    for i in range(len(arr)):
+        if i == newindex:
+            arr[i] = int(arr[i])
+            arr[i] = oldv
+        if i == index:
+            arr[i] = oldv2
+    
+    return arr
+
+def unicorn(uni,unico,unicorn):
+    unicorn = unicorn.strip('][').split(', ')
     uni = uni.strip('][').split(', ')
     unico = unico.strip('][').split(', ')
+    for i in range(len(unicorn) - 1):
+        uni = moveval(int(unicorn[i + 1]),int(unicorn[i]),uni)
+    
+    
+    
+    
+    sup = 0
     print(unico)
     if unico != ['']:
         for each in range(len(unico ) - sup):
@@ -50,11 +72,13 @@ def unicorn(uni,unico):
             l1.pack()
     
 
-b1 = Button(main,text="decrypt",command=lambda : unicorn(e1.get(),e2.get()))    
+b1 = Button(main,text="decrypt",command=lambda : unicorn(e1.get(),e2.get(),e3.get()))    
 inf = Label(main,text="key")
 e1 = Entry(main)
 inf2 = Label(main,text="salt")
 e2 = Entry(main)
+inf3 = Label(main,text="hash")
+e3 = Entry(main)
 l1 = Label(main,text="")
 
 b1.pack()
@@ -62,4 +86,6 @@ inf.pack()
 e1.pack()
 inf2.pack()
 e2.pack()
+inf3.pack()
+e3.pack()
 main.mainloop()
