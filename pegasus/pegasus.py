@@ -4,7 +4,26 @@ import os
 from tkinter import *
 import string
 
+def move(val,pos,array):
+    oldarr = array
+    newarr = []
+    for i in range(len(array)):
+        if pos == i:
+            newarr.append(val)
+        newarr.append(oldarr[i])    
+    return newarr
 
+def moveval(index,newindex,arr):
+    oldv = arr[index]
+    oldv2 = arr[newindex]
+    
+    for i in range(len(arr)):
+        if i == newindex:
+            arr[i] = oldv
+        if i == index:
+            arr[i] = oldv2
+    
+    return arr
 
 
 def startup():
@@ -52,6 +71,22 @@ def pegasus(peg):
     print(f"youre key : {enclst}")
     salt(enclst)
 
+def hash(lst,saltlst):
+    hashpack = []
+    hash = []
+    for i in range(len(lst)):
+        rand = random.randint(0,len(lst) - 1)
+        if random.randint(0,3) == 3:
+            lst = moveval(i,rand,lst)
+            hash.append(i)
+            hash.append(rand)
+    print(f"hash list : {hash}")
+        
+    print(f"youre saltet key : {lst}")
+    print(f"youre salt : {saltlst}")
+    print(f"youre hash : {hash}")
+    
+
 def salt(lst):
     saltlst = []
     REE = 0
@@ -75,10 +110,9 @@ def salt(lst):
                 lst.insert(REE + 2,fop)
                 print(ch)
                 saltlst.append(REE)
-    print(f"youre saltet key : {lst}")
-    print(f"youre salt : {saltlst}")
+    hash(lst,saltlst)
+
             
-    
 def Anihalate():
     with open("key.txt","w") as key:
         key.write("")
