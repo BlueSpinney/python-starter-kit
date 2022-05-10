@@ -1,5 +1,4 @@
 
-
 from tkinter import *
 import string
 
@@ -13,7 +12,6 @@ def moveval(index,newindex,arr):
     
     for i in range(len(arr)):
         if i == newindex:
-            arr[i] = int(arr[i])
             arr[i] = oldv
         if i == index:
             arr[i] = oldv2
@@ -24,8 +22,10 @@ def unicorn(uni,unico,unicorn):
     unicorn = unicorn.strip('][').split(', ')
     uni = uni.strip('][').split(', ')
     unico = unico.strip('][').split(', ')
+    unicorn.reverse()
     for i in range(len(unicorn) - 1):
         uni = moveval(int(unicorn[i + 1]),int(unicorn[i]),uni)
+        i += 1
     
     
     
@@ -33,10 +33,10 @@ def unicorn(uni,unico,unicorn):
     sup = 0
     print(unico)
     if unico != ['']:
-        for each in range(len(unico ) - sup):
+        for each in range(int(len(unico ) / 3)):
             print(unico[each])
             print(f"removed : {uni[int(unico[each]) - sup]} {uni[int(unico[each]) + 1- sup]} {uni[int(unico[each]) + 2- sup]}")
-            del uni[(int(unico[each]) - sup)]
+            del uni[(int(unico[each])- sup)]
             print(uni)
             del uni[(int(unico[each])- sup)]
             print(uni)
@@ -49,6 +49,7 @@ def unicorn(uni,unico,unicorn):
     alphabet = alphabet + " "
     realletter = ""
     realletterl = []
+    print(f"final uni : {uni}")
     for i in range(len(uni)):
         print(uni[i])
         if count == 0:
@@ -61,9 +62,9 @@ def unicorn(uni,unico,unicorn):
             count += 1    
         elif count == 2:
             if uni[i] == "'P'":
-                realletter = alphabet[pointer2 - pointer]
-            elif uni[i] == "'s'":
                 realletter = alphabet[pointer2 + pointer]
+            elif uni[i] == "'s'":
+                realletter = alphabet[pointer2 - pointer]
             
             realletterl.append(realletter)
             
