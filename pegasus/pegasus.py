@@ -43,9 +43,16 @@ def pegasus(peg):
         pegl.append(peg[i])
     for i in range(len(pegl)):
         st = alphabet.index(pegl[i])
-        randint = random.randint(0,len(alphabet) - st - 1)
+        while True:  
+            randint = random.randint(0,len(alphabet) - st - 1)
+            
+            if randint + st < 26 or randint - st > 0:
+                if randint + st < 26:
+                    opjuge = 0
+                elif randint - st > 0:
+                    opjuge = 1
+                break
 
-        opjuge = random.randint(0,1)
         if opjuge == 0:
             print(randint)
             op = "P"
@@ -77,11 +84,9 @@ def hash(lst,saltlst):
     for i in range(len(lst)):
         rand = random.randint(0,len(lst) - 1)
         if random.randint(0,3) == 3:
-            lst = moveval(i,rand,lst)
             hash.append(i)
             hash.append(rand)
-    print(f"hash list : {hash}")
-        
+            lst = moveval(i,rand,lst) 
     print(f"youre saltet key : {lst}")
     print(f"youre salt : {saltlst}")
     print(f"youre hash : {hash}")
@@ -110,6 +115,7 @@ def salt(lst):
                 lst.insert(REE + 2,fop)
                 print(ch)
                 saltlst.append(REE)
+    print(f"pre saltlst : {lst}")
     hash(lst,saltlst)
 
             

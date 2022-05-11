@@ -19,21 +19,25 @@ def moveval(index,newindex,arr):
     return arr
 
 def unicorn(uni,unico,unicorn):
+    count = 0
     unicorn = unicorn.strip('][').split(', ')
     uni = uni.strip('][').split(', ')
     unico = unico.strip('][').split(', ')
     unicorn.reverse()
+    # remove hash
     for i in range(len(unicorn) - 1):
-        uni = moveval(int(unicorn[i + 1]),int(unicorn[i]),uni)
-        i += 1
+        uni = moveval(int(unicorn[count + 1]),int(unicorn[count]),uni)
+        count += 1
     
     
     
     
     sup = 0
     print(unico)
+    # remove salt
     if unico != ['']:
-        for each in range(int(len(unico ) / 3)):
+        for each in range(int(len(unico ) - sup)):
+            print(f"remove salt")
             print(unico[each])
             print(f"removed : {uni[int(unico[each]) - sup]} {uni[int(unico[each]) + 1- sup]} {uni[int(unico[each]) + 2- sup]}")
             del uni[(int(unico[each])- sup)]
@@ -50,6 +54,7 @@ def unicorn(uni,unico,unicorn):
     realletter = ""
     realletterl = []
     print(f"final uni : {uni}")
+    # decrypt message
     for i in range(len(uni)):
         print(uni[i])
         if count == 0:
