@@ -1,4 +1,4 @@
-from ast import operator
+
 import random
 import os
 from tkinter import *
@@ -44,12 +44,13 @@ def pegasus(peg):
     for i in range(len(pegl)):
         st = alphabet.index(pegl[i])
         while True:  
-            randint = random.randint(0,len(alphabet) - st - 1)
+            randint = random.randint(0,len(alphabet) - st + 1)
+            print(randint)
             
             if randint + st < 26 or randint - st > 0:
                 if randint + st < 26:
                     opjuge = 0
-                elif randint - st > 0:
+                else:
                     opjuge = 1
                 break
 
