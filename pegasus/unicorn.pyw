@@ -1,4 +1,3 @@
-
 from tkinter import *
 import string
 
@@ -25,11 +24,11 @@ def unicorn(uni,unico,unicorn):
     unico = unico.strip('][').split(', ')
     unicorn.reverse()
     # remove hash
-    for i in range(len(unicorn) - 1):
-        uni = moveval(int(unicorn[count + 1]),int(unicorn[count]),uni)
-        count += 1
-    
-    
+    print(len(unicorn) - 1)
+    for i in range(int((len(unicorn) - 1) / 2  + 1)):
+        print(f"moved {int(unicorn[count])} to {int(unicorn[count + 1])}")
+        uni = moveval(int(unicorn[count]),int(unicorn[count + 1]),uni)
+        count += 2
     
     
     sup = 0
@@ -67,9 +66,9 @@ def unicorn(uni,unico,unicorn):
             count += 1    
         elif count == 2:
             if uni[i] == "'P'":
-                realletter = alphabet[pointer2 + pointer]
-            elif uni[i] == "'s'":
                 realletter = alphabet[pointer2 - pointer]
+            elif uni[i] == "'s'":
+                realletter = alphabet[pointer2 + pointer]
             
             realletterl.append(realletter)
             
