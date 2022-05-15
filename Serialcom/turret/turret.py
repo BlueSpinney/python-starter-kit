@@ -3,16 +3,25 @@ import sys
 import serial
 import serial.tools.list_ports
 import time
+from tkinter import *
 ports = serial.tools.list_ports.comports()
 
 portlst = []
+duino = False
+port = ""
+y = input()
+
+if y == "n":
+    exit()
 
 for port, desc, hwid in sorted(ports):
     portlst.append(port)
     print("{}: {} [{}]".format(port, desc, hwid))
+    port = port
 
-
-arduino = serial.Serial(port=port, baudrate=115200, timeout=.1)
+if bool(port) != False:
+    arduino = serial.Serial(port=port, baudrate=115200, timeout=.1)
+    duino = True
 
 cascPath = r'C:\Users\Jerome\Desktop\python\turret\haarcascade_frontalface_default.xml'
 faceCascade = cv2.CascadeClassifier(cascPath)
@@ -44,10 +53,11 @@ while True:
     xcor = xcor * 180
     ycor = ycor / 300
     ycor = ycor * 180    
-    arduino.write(bytes(str(xcor),"utf-8"))
-    time.sleep(0.05)
-    arduino.write(bytes(str(ycor),"utf-8"))
-    time.sleep(0.05)
+    if duino == True:
+        arduino.write(bytes(str(xcor),"utf-8"))
+        time.sleep(0.05)
+        arduino.write(bytes(str(ycor),"utf-8"))
+        time.sleep(0.05)
 
 
     cv2.imshow('Video', frame)
