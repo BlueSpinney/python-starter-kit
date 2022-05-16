@@ -49,15 +49,20 @@ while True:
         print(f"the x y coardinates are {x} {y}")
         xcor = x
         ycor = y
-    xcor = xcor / 300
+    xcor = xcor / 500
     xcor = xcor * 180
     ycor = ycor / 300
-    ycor = ycor * 180    
+    ycor = ycor * 180  
+    xcor = int(xcor)
+    ycor = int(ycor)
+    corlst = [xcor,ycor]
+    print(f"the x y coardinates are {corlst}")  
+    if xcor > 180 or ycor > 180:
+        continue
     if duino == True:
-        arduino.write(bytes(str(xcor),"utf-8"))
+        arduino.write(bytes(str(corlst),"utf-8"))
         time.sleep(0.05)
-        arduino.write(bytes(str(ycor),"utf-8"))
-        time.sleep(0.05)
+
 
 
     cv2.imshow('Video', frame)
