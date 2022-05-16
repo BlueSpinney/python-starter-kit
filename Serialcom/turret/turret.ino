@@ -1,40 +1,66 @@
 #include <Servo.h>
 
-Servo serv1;
-Servo serv2;
+Servo ser;
+Servo ser2;
 
+String x;
 
-int recorx = 0;
-int recory = 0;
+String num = "";
+String fnum = "";
+String fnum2 = "";
 
-int corx = 0;
-int cory = 0;
+char xlst[50];
+int t1 = 0;
 
-int count = 0;
-
-int servox = 0;
-int servoy = 0;
 
 void setup() {
-  Serial.begin(112500);
-  Serial.setTimeout(1);
-
-  serv1.attach(9);
-  serv2.attach(10);
-
+ Serial.begin(115200);
+ Serial.setTimeout(1);
+ ser.attach(9);
+ ser2.attach(10);
 }
 
+
 void loop() {
-  while (!Serial.available()){
+   while (!Serial.available()){
+    x = "";
+
+    num = "";
+    fnum = "";
+    fnum2 = "";
     
-  }
-  for (int i = 0;i < Serial.readString().toInt() - servox;i++){
-    serv1.write(servox + i);
-    servox = servox + i;
-  }
-  delay(500);
-  for (int i = 0;i < Serial.readString().toInt() - servoy;i++){
-    serv2.write(servox + i);
-    servoy = servoy + i;
-  }  
+    xlst[50];
+    t1 = 0;
+   }
+   x = Serial.readString();
+   Serial.println(x);
+   int i = 0;
+   x.toCharArray(xlst,50);
+   while (t1 == 0){
+    Serial.print("xlst : ");
+    Serial.println(xlst);
+      if (xlst[i] == ']'){
+        fnum2 = num;
+        break;
+      }
+      if (xlst[i] != '[' and xlst[i] != ','){
+        num = num + xlst[i];
+      }
+      if (xlst[i] == ','){
+        if (fnum == ""){
+          fnum = num;
+          num = "";
+        }
+      }
+      i++;
+   }
+   fnum = fnum.toInt();
+   fnum2 = fnum2.toInt();
+   Serial.print("final number 1 : ");
+   Serial.println(fnum);
+   Serial.print("final number 2 : ");
+   Serial.println(fnum2);
+   ser.write(fnum.toInt());
+   ser2.write(fnum2.toInt());
+
 }
