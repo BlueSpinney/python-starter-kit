@@ -4,6 +4,11 @@ import serial
 import serial.tools.list_ports
 import time
 from tkinter import *
+from datetime import datetime
+
+now = datetime.now()
+
+current_time = now.strftime("%H:%M:%S")
 ports = serial.tools.list_ports.comports()
 
 portlst = []
@@ -28,7 +33,29 @@ faceCascade = cv2.CascadeClassifier(cascPath)
 
 video_capture = cv2.VideoCapture(0)
 
+st = 0
+
 while True:
+    now = datetime.now()
+    curlst = []
+    rc = ['','']
+
+    current_time = now.strftime("%H:%M:%S")
+    for i in range(len(current_time)):
+        curlst.append(current_time[i])
+    rc[0] = curlst[len(curlst) - 1]
+    rc[1] = curlst[len(curlst) - 2]
+    rc = rc[::-1]
+    print(f"{curlst}")
+    print(f"the current seconds{rc}")
+    intrc = "".join(rc)
+    intrc = int(intrc)
+    print(f"current start time {st}")
+
+    if intrc - 2== st or intrc < st:
+        duino = True
+
+
     xcor = 0
     ycor = 0
     # Capture frame-by-frame
@@ -61,7 +88,8 @@ while True:
         continue
     if duino == True:
         arduino.write(bytes(str(corlst),"utf-8"))
-        time.sleep(0.05)
+        duino = False
+        st = int("".join(rc))
 
 
 
