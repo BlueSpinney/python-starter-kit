@@ -4,7 +4,7 @@ from pynput import keyboard
 
 
 last_key = ""
-time = [0,0,":",0,0,":",0,0]
+time = [0,0,":",0,0,":",0,0,""]
 strlst = []
 i = 0
 eventlst = ["|"]
@@ -12,11 +12,14 @@ eventlst = ["|"]
 def merge(time,eventlst):
     pointer = 0
     eventlst[::-1]
+    
     for l in range(len(eventlst)):
         print(time[l])
-        if time[l] == ":":
+        if time[l] == ":" or l == 4:
             pointer += 1
             time[pointer] = eventlst[l]
+            if l == 4:
+                pointer -= 1
         else:
             time[pointer] = eventlst[l]
 
@@ -67,8 +70,27 @@ def on_press(key):
             b1.pack()
             strlst = []
 
-        def start():
-            pass
+        def start(timelst):
+            timelst = timelst[::-1]
+            timelst.strip("|")
+            constlst = []
+            finconst = []
+            for l in range(len(timelst)):
+                try:
+                    if timelst[l + 1]== ":":
+                        finconst.append(constlst)
+                        timelst = []
+                    
+                    constlst.append(timelst[l])
+                except:
+                    finconst.append(constlst)
+                    timelst = []    
+            finconst = finconst[::-1]
+            
+            for l in range(len(finconst)): 
+                templst = finconst[l]
+                    
+                    
 
 
         main.attributes("-topmost", True)
@@ -76,7 +98,7 @@ def on_press(key):
         main.bind('<Key>',input)
         
         t1 = Label(main,text="")
-        b1 = Button(main,text="start timer",command=start)
+        b1 = Button(main,text="start timer",command=lambda : start(time))
 
 
         main.mainloop()
