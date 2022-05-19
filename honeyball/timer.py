@@ -7,6 +7,20 @@ last_key = ""
 time = [0,0,":",0,0,":",0,0]
 strlst = []
 i = 0
+eventlst = ["|"]
+
+def merge(time,eventlst):
+    pointer = 0
+    eventlst[::-1]
+    for l in range(len(eventlst)):
+        print(time[l])
+        if time[l] == ":":
+            pointer += 1
+            time[pointer] = eventlst[l]
+        else:
+            time[pointer] = eventlst[l]
+
+        pointer += 1
 
 def on_press(key):
     global last_key,time
@@ -22,27 +36,39 @@ def on_press(key):
         main = Tk()
         
         def input(event):
+            k = event.char
             
-            global i,strlst,time
+            global i,strlst,time,eventlst
+
+            eventlst.insert(0,k)
+            print(eventlst)
             if i > len(time) - 1:
                 i = 0
                 strlst = []
                 time = [0,0,":",0,0,":",0,0]
-            print("hi")
-            k = event.char
+
             if k == "backspace":
                 i -= 1
-                time[i] = 0
-            if time[i] == ":":
-                i += 1
-            time[i] = k
-            i += 1
+                eventlst[i] = 0
+
+
+            merge(time,eventlst)
+            try:
+                time[i] = time[i]
+
+            except:
+                i = 0
+                print("stack overflow")
 
             for l in range(len(time)):
                 strlst.append(str(time[l]))
             t1.configure(text="".join(strlst[::-1]))
             t1.pack()
+            b1.pack()
             strlst = []
+
+        def start():
+            pass
 
 
         main.attributes("-topmost", True)
@@ -50,9 +76,15 @@ def on_press(key):
         main.bind('<Key>',input)
         
         t1 = Label(main,text="")
+        b1 = Button(main,text="start timer",command=start)
 
 
         main.mainloop()
+        last_key = ""
+        time = [0,0,":",0,0,":",0,0]
+        strlst = []
+        i = 0
+        eventlst = []
 
 
 
@@ -60,8 +92,6 @@ def on_press(key):
 
     
 
-    print(k)
-    print(last_key)
     
 
 listener = keyboard.Listener(on_press=on_press)
