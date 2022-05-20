@@ -1,6 +1,9 @@
 from tkinter import *
 
 from pynput import keyboard
+import logging
+import threading
+
 
 
 last_key = ""
@@ -72,7 +75,13 @@ def on_press(key):
 
         def start(timelst):
             timelst = timelst[::-1]
-            timelst.strip("|")
+            for l in range(len(timelst) - 1):
+                if timelst[l] == "|":
+                    timelst[l] = 0
+                if timelst[l] == '':
+                    timelst.pop(l)
+            print(f"time lst 1{timelst}")
+
             constlst = []
             finconst = []
             for l in range(len(timelst)):
@@ -86,9 +95,22 @@ def on_press(key):
                     finconst.append(constlst)
                     timelst = []    
             finconst = finconst[::-1]
+            ti = 0
             
             for l in range(len(finconst)): 
                 templst = finconst[l]
+                tempt = "".join(str(templst))
+                tempt = int(tempt)
+                if l == 0:
+                    ti += l
+                if l == 1:
+                    ti += l * 60
+                if l <= 2:
+                    ti += l * 600
+                event = threading.Event()
+                for l in range(ti):
+                    event.wait(1)
+                    print(l)
                     
                     
 
