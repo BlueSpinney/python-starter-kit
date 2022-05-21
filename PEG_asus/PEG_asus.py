@@ -21,6 +21,11 @@ class ctask:
     
     def delSelf(self):
         del self.name
+
+    def returnSefl(self):
+        arr = [self.name,self.segments,self.timeframe]
+
+        return(arr)
     
 def add(raw):
     global count,name,segments,timeframe
@@ -70,6 +75,9 @@ def add(raw):
         task[len(task)] = ctask(name,segments,timeframe)
         for i in range(len(task)):
             t = task[i]
+            tlst = t.returnSefl()
+            tasks.configure(text=f"{tlst[0]} \n {tlst[1]} \n {tlst[2]} \n ")
+            tasks.pack()
             
 
 
@@ -87,5 +95,3 @@ b1 = Button(main,text="add task",command=lambda : add(e1.get()))
 
 b1.pack()
 main.mainloop()
-
-
