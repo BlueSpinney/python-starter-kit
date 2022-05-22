@@ -26,14 +26,27 @@ class ctask:
         arr = [self.name,self.segments,self.timeframe]
 
         return(arr)
+
+def create(name,segments,timeframe):
+
+    pb = '////////////////////////////////////////////////////////////////////////////////////////////////////'
+
+    segments = int(segments)
+
+    percent = 100 / segments
+    return percent
+
+
     
 def add(raw):
     global count,name,segments,timeframe
     if count == 0:
         b1.configure(text="add name")
         b1.pack_forget()
+        w.pack_forget()
         e1.pack()
         b1.pack()
+        w.pack()
         
         count += 1
         
@@ -44,9 +57,11 @@ def add(raw):
         b1.configure(text="add segments")
         b1.pack_forget()
         e1.pack_forget()
+        w.pack_forget()
         e1.delete(0,END)
         e1.pack()
         b1.pack()   
+        w.pack()
         count += 1
         
     elif count == 2:
@@ -55,9 +70,11 @@ def add(raw):
         b1.configure(text="add timeframe")
         b1.pack_forget()
         e1.pack_forget()
+        w.pack_forget()
         e1.delete(0,END)
         e1.pack()
         b1.pack()   
+        w.pack()
         count += 1        
 
     elif count == 3:
@@ -66,23 +83,28 @@ def add(raw):
         b1.configure(text="add task")
         b1.pack_forget()
         e1.pack_forget()
-        b1.pack()   
+        w.pack_forget()
         
-        print(name)
-        print(segments)
-        print(timeframe)
+
         
         task[len(task)] = ctask(name,segments,timeframe)
+        lst = []
         for i in range(len(task)):
             t = task[i]
             tlst = t.returnSefl()
-            tasks.configure(text=f"{tlst[0]} \n {tlst[1]} \n {tlst[2]} \n ")
-            tasks.pack()
+            lst.append(tlst[0] + "\n")
+            lst.append(tlst[1] + "\n")
+            lst.append(tlst[2] + "\n \n")
+        lst = "".join(lst)
+
+        tasks.configure(text=f"{lst}")
+        tasks.pack()
+
+        b1.pack()   
+        w.pack()
             
 
-
-
-        
+        create(name,segments,timeframe)
         name = ""
         segments = ""
         timeframe = ""
@@ -92,6 +114,13 @@ tasks = Label(main,text="")
 e1 = Entry(main)
 b1 = Button(main,text="add task",command=lambda : add(e1.get()))
 
+variable = StringVar(main)
+variable.set("null") # default value
 
+w = OptionMenu(main, variable, "null")
 b1.pack()
+w.pack()
+
 main.mainloop()
+
+
