@@ -5,6 +5,19 @@ import webbrowser
 import atexit
 import time
 import serial
+import serial.tools.list_ports
+ports = serial.tools.list_ports.comports()
+
+portlst = []
+port1 = ""
+
+for port1, desc, hwid in sorted(ports):
+    portlst.append(port1)
+    print("{}: {} [{}]".format(port1, desc, hwid))
+
+
+arduino = serial.Serial(port=port1, baudrate=115200, timeout=.1)
+
 
 main = Tk()
 
@@ -122,6 +135,7 @@ def check_time():
             t = task[i]
             t = t.timeframe
             t = int(t)
+            print(f"acc t : {t}")
             if ct < t:
                 continue
             else:
@@ -166,10 +180,10 @@ def check_time():
                 
                 tasks.configure(text=f"{lst}")
                 tasks.pack()
-                for i in range(10):
-                    webbrowser.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
-                    time.sleep(0.1)
-                continue                
+
+                arduino.write(bytes("1","utf-8"))
+                print("punischment will be enacted")
+            
             
         except Exception as e: 
             print(traceback.format_exc())
@@ -376,5 +390,6 @@ def the_last_dab():
 
 atexit.register(the_last_dab)
 main.mainloop()
+
 
 
